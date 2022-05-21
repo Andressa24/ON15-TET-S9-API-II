@@ -60,6 +60,27 @@ app.post("/ghibli/cadastrar", (request,response)=>{
 
 
 
+
+
+app.delete("/ghibli/deletar/:id",(request, response) => {
+    const idRequest = request.params.id
+    const filmeEncontrado = ghibliJson.find(filme => filme.id == idRequest)
+
+    const indice = ghibliJson.indexOf(filmeEncontrado)
+    console.log(indice)
+
+    ghibliJson.splice(indice, 1)
+
+    response.status(200).json([{
+        "mensagem": "filme deletado com sucesso",
+        "filme-deletado": filmeEncontrado,
+        ghibliJson
+    }])
+})
+
+
+
+
 app.listen(3030, ()=>{
     console.log("alô, pepe moreno? to na porta 3030")
 })
